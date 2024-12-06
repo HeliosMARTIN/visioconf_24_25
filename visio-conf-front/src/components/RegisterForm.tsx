@@ -4,7 +4,6 @@ import "../styles/components/registerForm.scss"
 
 const RegisterForm: React.FC = () => {
     const [formData, setFormData] = useState({
-        username: "",
         email: "",
         password: "",
         firstname: "",
@@ -47,17 +46,6 @@ const RegisterForm: React.FC = () => {
 
     return (
         <form className="register-form" onSubmit={handleSubmit}>
-            <div className="form-group">
-                <label>Nom d'utilisateur</label>
-                <input
-                    type="text"
-                    name="username"
-                    placeholder="Ex: johndoe123"
-                    onChange={handleChange}
-                    required
-                />
-            </div>
-
             <div className="form-row">
                 <div className="form-group">
                     <label>Prénom</label>

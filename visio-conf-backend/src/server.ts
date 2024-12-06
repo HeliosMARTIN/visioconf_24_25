@@ -1,9 +1,9 @@
 import express from "express"
-import mongoose from "mongoose"
 import bodyParser from "body-parser"
 import cors from "cors"
 import authRoutes from "./routes/authRoutes"
 import userRoutes from "./routes/userRoutes"
+import mongoose from "mongoose"
 
 class Server {
     public app: express.Application
@@ -27,7 +27,6 @@ class Server {
     }
 
     private mongoSetup(): void {
-        mongoose.set("useCreateIndex", true)
         mongoose
             .connect("mongodb://localhost:27017/visio-conf", {
                 useNewUrlParser: true,

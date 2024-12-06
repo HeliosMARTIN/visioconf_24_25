@@ -7,6 +7,12 @@ const HomePage: React.FC = () => {
     const [loading, setLoading] = useState(true)
     const navigate = useNavigate()
 
+    const getProfilePicture = (picture: string) => {
+        return picture
+            ? `./src/assets/img/${picture}`
+            : "./src/assets/img/default_avatar.png"
+    }
+
     useEffect(() => {
         const fetchUserData = async () => {
             const token = localStorage.getItem("token")
@@ -45,28 +51,38 @@ const HomePage: React.FC = () => {
     return (
         <div className="home-page">
             <h1>Bienvenue sur VisioConf, {user.firstname}!</h1>
-            <div className="user-info">
-                <p>
-                    <strong>Nom d'utilisateur:</strong> {user.username}
-                </p>
-                <p>
-                    <strong>Email:</strong> {user.email}
-                </p>
-                <p>
-                    <strong>Prénom:</strong> {user.firstname}
-                </p>
-                <p>
-                    <strong>Nom:</strong> {user.lastname}
-                </p>
-                <p>
-                    <strong>Téléphone:</strong> {user.phone}
-                </p>
-                <p>
-                    <strong>Emploi:</strong> {user.job}
-                </p>
-                <p>
-                    <strong>Description:</strong> {user.description}
-                </p>
+            <div className="user-card">
+                <img
+                    src={getProfilePicture(user.picture)}
+                    alt="Profile"
+                    className="profile-picture"
+                />
+                <div className="user-info">
+                    <div className="info-row">
+                        <p>
+                            <strong>Prénom:</strong> {user.firstname}
+                        </p>
+                        <p>
+                            <strong>Nom:</strong> {user.lastname}
+                        </p>
+                    </div>
+                    <div className="info-row">
+                        <p>
+                            <strong>Email:</strong> {user.email}
+                        </p>
+                        <p>
+                            <strong>Téléphone:</strong> {user.phone}
+                        </p>
+                    </div>
+                    <div className="info-row">
+                        <p>
+                            <strong>Emploi:</strong> {user.job}
+                        </p>
+                        <p>
+                            <strong>Description:</strong> {user.desc}
+                        </p>
+                    </div>
+                </div>
             </div>
             <button onClick={handleLogout}>Déconnexion</button>
         </div>

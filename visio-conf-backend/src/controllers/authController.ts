@@ -1,12 +1,13 @@
 import { Request, Response } from "express"
-import bcrypt from "bcrypt"
+import { sha256 } from "js-sha256"
+import { v4 as uuidv4 } from "uuid"
 import jwt from "jsonwebtoken"
 import User from "../models/User"
+import Role from "../models/Role"
 
 class AuthController {
     public async register(req: Request, res: Response): Promise<void> {
         const {
-            username,
             email,
             password,
             firstname,
@@ -22,16 +23,18 @@ class AuthController {
                 return
             }
 
-            const hashedPassword = await bcrypt.hash(password, 10)
+            const hashedPassword = sha256(password)
+            const userRole = await Role.findOne({ role_uuid: "user" })
             const user = new User({
-                username,
+                uuid: uuidv4(),
                 email,
                 password: hashedPassword,
                 firstname,
                 lastname,
                 phone,
                 job,
-                description,
+                desc: description,
+                user_roles: [userRole._id],
             })
             await user.save()
             res.status(201).json({
@@ -39,6 +42,8 @@ class AuthController {
                 message: "Inscription réussie",
             })
         } catch (error) {
+            console.log(error)
+
             res.status(500).json({
                 success: false,
                 error: "Échec de l'inscription",
@@ -50,7 +55,7 @@ class AuthController {
         const { email, password } = req.body
         try {
             const user = await User.findOne({ email })
-            if (!user || !(await bcrypt.compare(password, user.password))) {
+            if (!user || sha256(password) !== user.password) {
                 res.status(401).json({
                     success: false,
                     message: "Email ou mot de passe invalide",
