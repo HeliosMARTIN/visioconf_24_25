@@ -10,22 +10,53 @@
     background-color: $white-color;
     border-radius: 10px;
     box-shadow: $box-shadow;
-    max-width: 600px;
+    max-width: 800px; // Increased width for horizontal layout
     margin: 2rem auto;
 
     h1 {
         color: $primary-color;
     }
 
-    .user-info {
+    .user-card {
         display: flex;
-        flex-direction: column;
-        gap: 10px;
+        flex-direction: row; // Horizontal layout
+        align-items: center;
+        gap: 20px;
         width: 100%;
+        padding: 1rem;
+        background-color: $background-color;
+        border-radius: 10px;
+        box-shadow: $box-shadow;
 
-        p {
-            font-size: 1rem;
-            color: #333;
+        .profile-picture {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .user-info {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            width: 100%;
+
+            .info-row {
+                display: flex;
+                gap: 20px;
+                width: 100%;
+
+                p {
+                    flex: 1;
+                    font-size: 1rem;
+                    color: #333;
+                }
+            }
+
+            p {
+                font-size: 1rem;
+                color: #333;
+            }
         }
     }
 
