@@ -1,0 +1,47 @@
+@use "../variables" as *;
+
+.home-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    padding: 2rem;
+    background-color: $white-color;
+    border-radius: 10px;
+    box-shadow: $box-shadow;
+    max-width: 600px;
+    margin: 2rem auto;
+
+    h1 {
+        color: $primary-color;
+    }
+
+    .user-info {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        width: 100%;
+
+        p {
+            font-size: 1rem;
+            color: #333;
+        }
+    }
+
+    button {
+        cursor: pointer;
+        padding: 10px;
+        background-color: $primary-color;
+        color: $white-color;
+        border: none;
+        border-radius: $border-radius;
+        width: 100%;
+        height: 40px;
+        transition: all 300ms;
+
+        &:hover {
+            background-color: $primary-color-hover;
+        }
+    }
+}

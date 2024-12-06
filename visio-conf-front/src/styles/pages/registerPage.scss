@@ -1,0 +1,34 @@
+@use "../variables" as *;
+
+.register-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: $background-color;
+
+    h1 {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+    }
+
+    .redirect-container {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        margin-top: 10px;
+        p {
+            text-wrap: nowrap;
+        }
+    }
+
+    .redirect-link {
+        color: $primary-color;
+        text-decoration: none;
+        &:hover {
+            background-color: $primary-color-hover;
+            color: $white-color;
+        }
+    }
+}
