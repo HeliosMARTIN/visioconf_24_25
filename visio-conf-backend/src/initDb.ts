@@ -350,6 +350,7 @@ mongoose
     .connect(mongoUri, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
+        authSource: "admin",
         user: process.env.MONGO_USER,
         pass: process.env.MONGO_PASSWORD,
     })
