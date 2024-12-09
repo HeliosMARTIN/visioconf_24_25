@@ -33,13 +33,25 @@ VisioConf est une application de visioconférence développée avec une architec
 
 1. **Démarrer MongoDB**
 
+    #### Pour Windows :
+
+    ```bash
+    net start MongoDB
+    ```
+
+    #### Pour macOS/Linux :
+
+    ```bash
+    sudo systemctl start mongod
+    ```
+
 2. **Se connecter à MongoDB avec mongosh**
 
     ```javascript
     mongosh
     ```
 
-3. **Créer un utilisateur**
+3. **Créer un utilisateur, dans le terminal mongosh**
 
     ```javascript
     use admin
