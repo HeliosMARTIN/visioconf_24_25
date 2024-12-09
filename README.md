@@ -66,7 +66,8 @@ VisioConf est une application de visioconférence développée avec une architec
     ```
 
 4. **Activer l'authentification dans le fichier de configuration** :  
-   Modifiez le fichier `mongod.cfg` pour activer l'authentification.
+   Dans le dossier où est installé MongoDB sur votre PC :
+   Modifiez le fichier `mongod.cfg` pour activer l'authentification (en tant qu'administrateur).
 
     Ajoutez ou mettez à jour la section suivante :
 
