@@ -32,10 +32,18 @@ class Server {
     }
 
     private mongoSetup(): void {
+        const mongoUri = process.env.MONGO_URI
+        if (!mongoUri) {
+            throw new Error(
+                "MONGO_URI is not defined in the environment variables"
+            )
+        }
         mongoose
-            .connect("mongodb://localhost:27017/visio-conf", {
+            .connect(mongoUri, {
                 useNewUrlParser: true,
                 useUnifiedTopology: true,
+                user: process.env.MONGO_USER,
+                pass: process.env.MONGO_PASSWORD,
             })
             .then(() => console.log("MongoDB connecté"))
             .catch((err) =>

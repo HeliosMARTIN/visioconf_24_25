@@ -4,9 +4,12 @@ import { sha256 } from "js-sha256"
 import User from "./models/User"
 import Role from "./models/Role"
 import Permission from "./models/Permission"
+import dotenv from "dotenv"
 
-const ADMIN_EMAIL = "admin@gmail.com"
-const ADMIN_PASSWORD = "admin"
+dotenv.config()
+
+const ADMIN_EMAIL = process.env.ADMIN_EMAIL
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD
 
 interface UserToInsert {
     uuid: string
@@ -336,10 +339,19 @@ const initializeUsers = async () => {
     }
 }
 
+const mongoUri = process.env.MONGO_URI
+if (!mongoUri) {
+    throw new Error(
+        "MONGO_URI n'est pas défini dans les variables d'environnement"
+    )
+}
+
 mongoose
-    .connect("mongodb://localhost:27017/visio-conf", {
+    .connect(mongoUri, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
+        user: process.env.MONGO_USER,
+        pass: process.env.MONGO_PASSWORD,
     })
     .then(async () => {
         console.log("Connecté à MongoDB")
