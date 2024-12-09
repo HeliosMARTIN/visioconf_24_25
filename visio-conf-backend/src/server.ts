@@ -4,6 +4,9 @@ import cors from "cors"
 import authRoutes from "./routes/authRoutes"
 import userRoutes from "./routes/userRoutes"
 import mongoose from "mongoose"
+import dotenv from "dotenv"
+
+dotenv.config()
 
 class Server {
     public app: express.Application
@@ -18,7 +21,9 @@ class Server {
     private config(): void {
         this.app.use(bodyParser.json())
         this.app.use(bodyParser.urlencoded({ extended: false }))
-        this.app.use(cors({ origin: "http://localhost:5173" }))
+        this.app.use(
+            cors({ origin: "http://localhost:5173", credentials: true })
+        )
     }
 
     private routes(): void {

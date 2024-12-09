@@ -37,4 +37,13 @@ button:hover {
 
 a {
     transition: all 300ms;
+    &.redirect-link {
+        color: $primary-color;
+        text-decoration: none;
+        cursor: pointer;
+        &:hover {
+            background-color: $primary-color-hover;
+            color: $white-color;
+        }
+    }
 }

@@ -12,6 +12,7 @@ const RegisterForm: React.FC = () => {
         job: "",
         description: "",
     })
+    const [error, setError] = useState<string | null>(null)
     const navigate = useNavigate()
 
     const handleChange = (
@@ -37,10 +38,10 @@ const RegisterForm: React.FC = () => {
             if (data.success) {
                 navigate("/login")
             } else {
-                console.error("Échec de l'inscription: ", data.error)
+                setError(data.error || "Échec de l'inscription")
             }
         } catch (error) {
-            console.error("Erreur:", error)
+            setError("Erreur: " + (error as Error).message)
         }
     }
 
@@ -126,7 +127,7 @@ const RegisterForm: React.FC = () => {
                     required
                 />
             </div>
-
+            {error && <p className="error-message">{error}</p>}
             <button type="submit">S'inscrire</button>
         </form>
     )

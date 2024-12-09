@@ -2,9 +2,10 @@ import React, { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import "../styles/components/loginForm.scss"
 
-const LoginForm: React.FC = () => {
+const LoginForm: React.FC<{ onLogin: () => void }> = ({ onLogin }) => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const [error, setError] = useState<string | null>(null)
     const navigate = useNavigate()
 
     const handleSubmit = async (event: React.FormEvent) => {
@@ -20,12 +21,13 @@ const LoginForm: React.FC = () => {
             const data = await response.json()
             if (data.success) {
                 localStorage.setItem("token", data.token)
-                navigate("/")
+                onLogin()
+                navigate("/", { replace: true })
             } else {
-                console.error("Connexion échouée: ", data.message)
+                setError(data.message || "Connexion échouée")
             }
         } catch (error) {
-            console.error("Erreur:", error)
+            setError("Erreur: " + (error as Error).message)
         }
     }
 
@@ -53,6 +55,7 @@ const LoginForm: React.FC = () => {
                 />
             </div>
 
+            {error && <p className="error-message">{error}</p>}
             <button type="submit">Se connecter</button>
         </form>
     )

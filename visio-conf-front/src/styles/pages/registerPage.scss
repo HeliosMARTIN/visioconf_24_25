@@ -5,7 +5,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100vh;
+    height: 90vh;
     background-color: $background-color;
 
     h1 {
@@ -20,15 +20,6 @@
         margin-top: 10px;
         p {
             text-wrap: nowrap;
-        }
-    }
-
-    .redirect-link {
-        color: $primary-color;
-        text-decoration: none;
-        &:hover {
-            background-color: $primary-color-hover;
-            color: $white-color;
         }
     }
 }
