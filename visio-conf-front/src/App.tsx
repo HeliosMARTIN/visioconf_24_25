@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from "react"
 import { Routes, Route, Navigate } from "react-router-dom"
+
 import Navbar from "./components/Navbar"
 import LoginPage from "./pages/LoginPage"
 import RegisterPage from "./pages/RegisterPage"
 import HomePage from "./pages/HomePage"
 import AccountPage from "./pages/AccountPage"
+import DiscussionsPage from "./pages/DiscussionsPage"
+import GroupsPage from "./pages/GroupsPage"
 import "./styles/app.scss"
 
 const AuthenticatedApp: React.FC<{ onLogout: () => void }> = ({ onLogout }) => (
@@ -13,6 +16,8 @@ const AuthenticatedApp: React.FC<{ onLogout: () => void }> = ({ onLogout }) => (
         <div className="content">
             <Routes>
                 <Route path="/" element={<HomePage />} />
+                <Route path="/discussions" element={<DiscussionsPage />} />
+                <Route path="/groups" element={<GroupsPage />} />
                 <Route
                     path="/account"
                     element={<AccountPage onLogout={onLogout} />}
