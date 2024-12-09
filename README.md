@@ -29,6 +29,66 @@ VisioConf est une application de visioconférence développée avec une architec
     npm run dev
     ```
 
+## Configuration de MongoDB avec authentification
+
+1. **Démarrer MongoDB**
+
+2. **Se connecter à MongoDB avec mongosh**
+
+    ```javascript
+    mongosh
+    ```
+
+3. **Créer un utilisateur**
+
+    ```javascript
+    use admin
+    ```
+
+    ```javascript
+    db.createUser({
+        user: "visio-conf-user",
+        pwd: "visio-conf-password",
+        roles: [{ role: "readWrite", db: "visio-conf" }],
+    })
+    ```
+
+4. **Activer l'authentification dans le fichier de configuration** :  
+   Modifiez le fichier `mongod.cfg` pour activer l'authentification.
+
+    Ajoutez ou mettez à jour la section suivante :
+
+    ```yaml
+    security:
+        authorization: enabled
+    ```
+
+5. **Redémarrer MongoDB** :
+
+    #### Pour Windows :
+
+    ```bash
+    net stop MongoDB
+    net start MongoDB
+    ```
+
+    #### Pour macOS/Linux :
+
+    ```bash
+    sudo systemctl restart mongod
+    ```
+
+6. **Tester la connexion avec authentification** :  
+   Vérifiez que l'authentification fonctionne en exécutant :
+
+    ```bash
+    mongosh --username visio-conf-user --password visio-conf-password --authenticationDatabase admin
+    ```
+
+    Si la connexion est réussie, l'installation est correcte.
+
+---
+
 ### Back-end
 
 1. Naviguez vers le répertoire du back-end :
@@ -55,61 +115,6 @@ VisioConf est une application de visioconférence développée avec une architec
     ```bash
     npm run dev
     ```
-
-## Configuration de MongoDB avec authentification
-
-### Étapes générales
-
-1. **Créer un utilisateur MongoDB** :  
-   Une fois MongoDB démarré, utilisez mongosh et exécutez les commandes suivantes :
-
-    ```javascript
-    use admin
-    ```
-
-    ```javascript
-    db.createUser({
-        user: "visio-conf-user",
-        pwd: "visio-conf-password",
-        roles: [{ role: "readWrite", db: "visio-conf" }],
-    })
-    ```
-
-2. **Activer l'authentification dans le fichier de configuration** :  
-   Modifiez le fichier `mongod.cfg` pour activer l'authentification.
-
-    Ajoutez ou mettez à jour la section suivante :
-
-    ```yaml
-    security:
-        authorization: enabled
-    ```
-
-3. **Redémarrer MongoDB** :
-
-    #### Pour Windows :
-
-    ```bash
-    net stop MongoDB
-    net start MongoDB
-    ```
-
-    #### Pour macOS/Linux :
-
-    ```bash
-    sudo systemctl restart mongod
-    ```
-
-4. **Tester la connexion avec authentification** :  
-   Vérifiez que l'authentification fonctionne en exécutant :
-
-    ```bash
-    mongosh --username visio-conf-user --password visio-conf-password --authenticationDatabase admin
-    ```
-
-    Si la connexion est réussie, l'installation est correcte.
-
----
 
 ## Utilisation
 
